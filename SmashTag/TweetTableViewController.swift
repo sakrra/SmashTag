@@ -17,6 +17,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    var showSearchBar = true
+    
     private var tweets = [Array<Twitter.Tweet>]() {
         didSet {
             print(tweets)
@@ -36,7 +38,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     private func twitterRequest() -> Twitter.Request? {
         if let query = searchText, !query.isEmpty {
-            return Twitter.Request(search: query, count: 100)
+            return Twitter.Request(search: "\(query) -filter retweet", count: 100)
         }
         return nil
     }
@@ -61,7 +63,21 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-        searchText = "#stanford"
+        refreshControl?.addTarget(self, action: #selector(self.handleRefresh(refreshData:)), for: .valueChanged)
+        //searchText = "#stanford"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchField?.isHidden = !showSearchBar
+        if !showSearchBar {
+           tableView.tableHeaderView = nil
+        }
+    }
+    
+    func handleRefresh(refreshData: UIRefreshControl) {
+        searchForTweets()
+        refreshControl?.endRefreshing()
     }
     
     // MARK: - Table view data source
@@ -133,14 +149,21 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let mentionsViewController = (segue.destination as? MentionsTableViewController) {
+            if segue.identifier == "mention" {
+                if let tweetCell = (sender as? TweetTableViewCell) {
+                    mentionsViewController.tweet = tweetCell.tweet
+                }
+            }
+        }
     }
-    */
+    
 
 }

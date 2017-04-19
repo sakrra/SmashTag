@@ -20,7 +20,33 @@ class TweetTableViewCell: UITableViewCell {
     var tweet: Twitter.Tweet? { didSet { updateUI() } }
     
     private func updateUI() {
-        tweetMessageLabel?.text = tweet?.text
+        if let tweetUnwrapped = tweet {
+            let attributedText = NSMutableAttributedString(string: tweetUnwrapped.text)
+            
+            // lets color mentions (urls, hashtags, user mentions)
+            if tweetUnwrapped.urls.count > 0 {
+                for urls in tweetUnwrapped.urls {
+                    let urlColorAttribute = [NSForegroundColorAttributeName: UIColor.blue]
+                    attributedText.addAttributes(urlColorAttribute, range: urls.nsrange)
+                }
+            }
+            if tweetUnwrapped.hashtags.count > 0 {
+                for hashTag in tweetUnwrapped.hashtags {
+                    let hashColorAttribute = [NSForegroundColorAttributeName: UIColor.orange]
+                    attributedText.addAttributes(hashColorAttribute, range: hashTag.nsrange)
+                }
+            }
+            if tweetUnwrapped.userMentions.count > 0 {
+                for userMention in tweetUnwrapped.userMentions {
+                    let userColorAttribute = [NSForegroundColorAttributeName: UIColor.magenta]
+                    attributedText.addAttributes(userColorAttribute, range: userMention.nsrange)
+                }
+            }
+            tweetMessageLabel?.attributedText = attributedText
+        }
+        
+        
+        
         tweetUserLabel?.text = tweet?.user.description
         
         if let profileImageURL = tweet?.user.profileImageURL {
