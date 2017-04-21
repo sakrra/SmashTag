@@ -31,7 +31,6 @@ class ImageTableViewCell: UITableViewCell {
     
     private func updateUI() {
         if let url = tweetImageURL {
-            print("Image url = \(url)")
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 self?.spinner.startAnimating()
                 if let data = try? Data(contentsOf: url) {

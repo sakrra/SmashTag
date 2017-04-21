@@ -11,6 +11,8 @@ import Twitter
 
 class MentionsTableViewController: UITableViewController {
 
+    static let identifier = "MentionsTableViewController"
+    
     var tweet: Tweet? {
         didSet {
             updateUI()
@@ -111,14 +113,21 @@ class MentionsTableViewController: UITableViewController {
         if indexPath.section != 0 {
             return UITableViewAutomaticDimension
         } else {
-            print(tweet!.media[indexPath.row].aspectRatio)
-            print(tweet!.media[indexPath.row].description)
-            print(view.frame.size.width / CGFloat(tweet?.media[indexPath.row].aspectRatio ?? 0.0))
             return view.frame.size.width / CGFloat(tweet?.media[indexPath.row].aspectRatio ?? 0.0)
         }
     }
  
-        
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 3 {
+            // open url in safari
+            print("open link in safari")
+            if let tweetUnwrapped = tweet {
+                let url = URL(string: tweetUnwrapped.urls[indexPath.row].keyword)!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -156,7 +165,17 @@ class MentionsTableViewController: UITableViewController {
 
     
     // MARK: - Navigation
-
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "showList" {
+            if let cell = sender as? UITableViewCell {
+                if (cell.textLabel?.text?.hasPrefix("http"))! {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.

@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9747EF0C1EA8F4FD0099E75A /* MentionPopularityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9747EF0B1EA8F4FD0099E75A /* MentionPopularityTableViewController.swift */; };
+		9747EF0F1EA8F5550099E75A /* FetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9747EF0D1EA8F5550099E75A /* FetchedResultsTableViewController.swift */; };
+		9747EF101EA8F5550099E75A /* UITableViewDataSource+NSFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9747EF0E1EA8F5550099E75A /* UITableViewDataSource+NSFetchedResultsController.swift */; };
+		9747EF131EA8F92F0099E75A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9747EF111EA8F92F0099E75A /* Model.xcdatamodeld */; };
 		97BA4C771EA74EB200C3AD69 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BA4C761EA74EB200C3AD69 /* ImageViewController.swift */; };
 		97BA4C791EA798B200C3AD69 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BA4C781EA798B200C3AD69 /* HistoryTableViewController.swift */; };
+		97BA4C7B1EA79BE700C3AD69 /* HistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BA4C7A1EA79BE700C3AD69 /* HistoryData.swift */; };
 		97CAAB3F1EA4CA5B00394548 /* MentionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CAAB3E1EA4CA5B00394548 /* MentionsTableViewController.swift */; };
 		97CAAB411EA4D64100394548 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CAAB401EA4D64100394548 /* ImageTableViewCell.swift */; };
 		97E157CB1EA36F03000D8A64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E157CA1EA36F03000D8A64 /* AppDelegate.swift */; };
@@ -36,8 +41,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9747EF0B1EA8F4FD0099E75A /* MentionPopularityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionPopularityTableViewController.swift; sourceTree = "<group>"; };
+		9747EF0D1EA8F5550099E75A /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewController.swift; sourceTree = "<group>"; };
+		9747EF0E1EA8F5550099E75A /* UITableViewDataSource+NSFetchedResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewDataSource+NSFetchedResultsController.swift"; sourceTree = "<group>"; };
+		9747EF121EA8F92F0099E75A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		97BA4C761EA74EB200C3AD69 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		97BA4C781EA798B200C3AD69 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		97BA4C7A1EA79BE700C3AD69 /* HistoryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryData.swift; sourceTree = "<group>"; };
 		97CAAB3E1EA4CA5B00394548 /* MentionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsTableViewController.swift; sourceTree = "<group>"; };
 		97CAAB401EA4D64100394548 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		97E157C71EA36F03000D8A64 /* SmashTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmashTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,12 +93,17 @@
 			isa = PBXGroup;
 			children = (
 				97E157CE1EA36F03000D8A64 /* Main.storyboard */,
+				9747EF111EA8F92F0099E75A /* Model.xcdatamodeld */,
+				9747EF0B1EA8F4FD0099E75A /* MentionPopularityTableViewController.swift */,
+				97BA4C7A1EA79BE700C3AD69 /* HistoryData.swift */,
 				97BA4C781EA798B200C3AD69 /* HistoryTableViewController.swift */,
 				97BA4C761EA74EB200C3AD69 /* ImageViewController.swift */,
 				97CAAB401EA4D64100394548 /* ImageTableViewCell.swift */,
 				97CAAB3E1EA4CA5B00394548 /* MentionsTableViewController.swift */,
 				97E158201EA37728000D8A64 /* TweetTableViewController.swift */,
 				97E158261EA387EF000D8A64 /* TweetTableViewCell.swift */,
+				9747EF0D1EA8F5550099E75A /* FetchedResultsTableViewController.swift */,
+				9747EF0E1EA8F5550099E75A /* UITableViewDataSource+NSFetchedResultsController.swift */,
 				97E1581F1EA376BE000D8A64 /* Supporting files */,
 			);
 			path = SmashTag;
@@ -186,7 +201,12 @@
 				97E158211EA37728000D8A64 /* TweetTableViewController.swift in Sources */,
 				97BA4C791EA798B200C3AD69 /* HistoryTableViewController.swift in Sources */,
 				97BA4C771EA74EB200C3AD69 /* ImageViewController.swift in Sources */,
+				9747EF0F1EA8F5550099E75A /* FetchedResultsTableViewController.swift in Sources */,
+				97BA4C7B1EA79BE700C3AD69 /* HistoryData.swift in Sources */,
 				97E158271EA387EF000D8A64 /* TweetTableViewCell.swift in Sources */,
+				9747EF101EA8F5550099E75A /* UITableViewDataSource+NSFetchedResultsController.swift in Sources */,
+				9747EF0C1EA8F4FD0099E75A /* MentionPopularityTableViewController.swift in Sources */,
+				9747EF131EA8F92F0099E75A /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +371,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9747EF111EA8F92F0099E75A /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9747EF121EA8F92F0099E75A /* Model.xcdatamodel */,
+			);
+			currentVersion = 9747EF121EA8F92F0099E75A /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 97E157BF1EA36F02000D8A64 /* Project object */;
 }

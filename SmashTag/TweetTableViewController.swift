@@ -19,11 +19,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     var showSearchBar = true
     
-    private var tweets = [Array<Twitter.Tweet>]() {
-        didSet {
-            print(tweets)
-        }
-    }
+    fileprivate var tweets = [Array<Twitter.Tweet>]()
     
     var searchText: String? {
         didSet {
@@ -38,7 +34,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     private func twitterRequest() -> Twitter.Request? {
         if let query = searchText, !query.isEmpty {
-            return Twitter.Request(search: "\(query) -filter retweet", count: 100)
+            return Twitter.Request(search: "\(query) -filter:retweets", count: 100)
         }
         return nil
     }
@@ -48,11 +44,13 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     func searchForTweets() {
         if let request = twitterRequest() {
             lastTwitterRequest = request
-            request.fetchTweets { [weak self] newTweets in
-                DispatchQueue.main.async {
-                    if request == self?.lastTwitterRequest {
-                        self?.tweets.insert(newTweets, at: 0)
-                        self?.tableView.insertSections([0], with: .fade)
+            DispatchQueue.global(qos: .userInitiated).async {
+                request.fetchTweets { [weak self] newTweets in
+                    DispatchQueue.main.async {
+                        if request == self?.lastTwitterRequest {
+                            self?.tweets.insert(newTweets, at: 0)
+                            self?.tableView.insertSections([0], with: .fade)
+                        }
                     }
                 }
             }
@@ -64,6 +62,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         refreshControl?.addTarget(self, action: #selector(self.handleRefresh(refreshData:)), for: .valueChanged)
+        registerForPreviewing(with: self, sourceView: tableView)
         //searchText = "#stanford"
     }
     
@@ -98,8 +97,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
         // Configure the cell...
         let tweet: Tweet = tweets[indexPath.section][indexPath.row]
-        //cell.textLabel?.text = tweet.text
-        //cell.detailTextLabel?.text = tweet.user.name
         if let tweetCell = cell as? TweetTableViewCell {
             tweetCell.tweet = tweet
         }
@@ -108,47 +105,24 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == searchField {
+        if textField == searchField, textField.text != "" {
             searchText = searchField.text
+            var historyData = HistoryData()
+            historyData.maxNumberOfItemsStored = 100
+            if let text = searchText {
+                historyData.add(text)
+            }
+            print("historyData = \(historyData.data)")
+            print("historySize = \(historyData.maxNumberOfItemsStored)")
         }
         return true
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView == tableView {
+            searchField?.resignFirstResponder()
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 
@@ -164,6 +138,26 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             }
         }
     }
-    
+}
 
+extension TweetTableViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView?.indexPathForRow(at: location) else { return nil }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: MentionsTableViewController.identifier)
+        guard let mentionsTableViewController = viewController as? MentionsTableViewController else { return nil }
+        mentionsTableViewController.tweet = tweets[indexPath.section][indexPath.row]
+        let cellRect = tableView.rectForRow(at: indexPath)
+        previewingContext.sourceRect = previewingContext.sourceView.convert(cellRect, from: tableView)
+        
+        return mentionsTableViewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        if let mentionsTableViewController = viewControllerToCommit as? MentionsTableViewController {
+            //chatDetailViewController.isReplyButtonHidden = false
+        }
+        show(viewControllerToCommit, sender: self)
+    }
 }
