@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Mention" representedClassName="Mention" syncable="YES" codeGenerationType="category">
+    <entity name="Mention" representedClassName=".Mention" syncable="YES" codeGenerationType="category">
         <attribute name="keyword" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="newRelationship" inverseEntity="Tweet" syncable="YES"/>
+        <attribute name="tweetCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="mentions" inverseEntity="Tweet" syncable="YES"/>
     </entity>
-    <entity name="Tweet" representedClassName="Tweet" syncable="YES" codeGenerationType="category">
-        <attribute name="identification" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="newRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Mention" inverseName="tweets" inverseEntity="Mention" syncable="YES"/>
+    <entity name="SearchWord" representedClassName=".SearchWord" syncable="YES" codeGenerationType="category">
+        <attribute name="keyword" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tweet" inverseName="searchWord" inverseEntity="Tweet" syncable="YES"/>
+    </entity>
+    <entity name="Tweet" representedClassName=".Tweet" syncable="YES" codeGenerationType="category">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mentions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Mention" inverseName="tweets" inverseEntity="Mention" syncable="YES"/>
+        <relationship name="searchWord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchWord" inverseName="tweets" inverseEntity="SearchWord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Tweet" positionX="-54" positionY="-9" width="128" height="73"/>
-        <element name="Mention" positionX="207" positionY="-9" width="128" height="73"/>
+        <element name="Mention" positionX="214" positionY="-45" width="128" height="88"/>
+        <element name="Tweet" positionX="-29" positionY="-27" width="128" height="103"/>
+        <element name="SearchWord" positionX="-252" positionY="-27" width="128" height="88"/>
     </elements>
 </model>

@@ -18,6 +18,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     var showSearchBar = true
+    var justSearched = false
     
     fileprivate var tweets = [Array<Twitter.Tweet>]()
     
@@ -41,6 +42,11 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     private var lastTwitterRequest: Twitter.Request?
     
+    func insertTweets(_ newTweets: [Twitter.Tweet]) {
+        tweets.insert(newTweets, at: 0)
+        tableView.insertSections([0], with: .fade)
+    }
+    
     func searchForTweets() {
         if let request = twitterRequest() {
             lastTwitterRequest = request
@@ -48,8 +54,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                 request.fetchTweets { [weak self] newTweets in
                     DispatchQueue.main.async {
                         if request == self?.lastTwitterRequest {
-                            self?.tweets.insert(newTweets, at: 0)
-                            self?.tableView.insertSections([0], with: .fade)
+                            self?.insertTweets(newTweets)
+                            self?.justSearched = false
+                            
                         }
                     }
                 }
@@ -96,7 +103,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
 
         // Configure the cell...
-        let tweet: Tweet = tweets[indexPath.section][indexPath.row]
+        let tweet: Twitter.Tweet = tweets[indexPath.section][indexPath.row]
         if let tweetCell = cell as? TweetTableViewCell {
             tweetCell.tweet = tweet
         }
@@ -106,6 +113,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchField, textField.text != "" {
+            justSearched = true
             searchText = searchField.text
             var historyData = HistoryData()
             historyData.maxNumberOfItemsStored = 100

@@ -13,7 +13,7 @@ class MentionsTableViewController: UITableViewController {
 
     static let identifier = "MentionsTableViewController"
     
-    var tweet: Tweet? {
+    var tweet: Twitter.Tweet? {
         didSet {
             updateUI()
         }
