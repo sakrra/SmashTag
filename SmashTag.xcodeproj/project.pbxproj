@@ -15,6 +15,8 @@
 		9747EF381EAA02CB0099E75A /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9747EF371EAA02CB0099E75A /* Mention.swift */; };
 		974B8BD61EAA409500C739CA /* SmashTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974B8BD51EAA409500C739CA /* SmashTableViewController.swift */; };
 		974B8BD81EAB81F400C739CA /* SearchWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974B8BD71EAB81F400C739CA /* SearchWord.swift */; };
+		974B8BDA1EAE35ED00C739CA /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974B8BD91EAE35ED00C739CA /* ImageCollectionViewController.swift */; };
+		974B8BDC1EAF39A600C739CA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974B8BDB1EAF39A600C739CA /* ImageCollectionViewCell.swift */; };
 		97BA4C771EA74EB200C3AD69 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BA4C761EA74EB200C3AD69 /* ImageViewController.swift */; };
 		97BA4C791EA798B200C3AD69 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BA4C781EA798B200C3AD69 /* HistoryTableViewController.swift */; };
 		97BA4C7B1EA79BE700C3AD69 /* HistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BA4C7A1EA79BE700C3AD69 /* HistoryData.swift */; };
@@ -53,6 +55,8 @@
 		9747EF371EAA02CB0099E75A /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
 		974B8BD51EAA409500C739CA /* SmashTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmashTableViewController.swift; sourceTree = "<group>"; };
 		974B8BD71EAB81F400C739CA /* SearchWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchWord.swift; sourceTree = "<group>"; };
+		974B8BD91EAE35ED00C739CA /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
+		974B8BDB1EAF39A600C739CA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		97BA4C761EA74EB200C3AD69 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		97BA4C781EA798B200C3AD69 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		97BA4C7A1EA79BE700C3AD69 /* HistoryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryData.swift; sourceTree = "<group>"; };
@@ -100,9 +104,9 @@
 		97E157C91EA36F03000D8A64 /* SmashTag */ = {
 			isa = PBXGroup;
 			children = (
-				97E157CA1EA36F03000D8A64 /* AppDelegate.swift */,
 				97E157CE1EA36F03000D8A64 /* Main.storyboard */,
 				9747EF111EA8F92F0099E75A /* Model.xcdatamodeld */,
+				97E157CA1EA36F03000D8A64 /* AppDelegate.swift */,
 				974B8BD71EAB81F400C739CA /* SearchWord.swift */,
 				9747EF351EAA02B50099E75A /* Tweet.swift */,
 				9747EF371EAA02CB0099E75A /* Mention.swift */,
@@ -115,6 +119,8 @@
 				97E158201EA37728000D8A64 /* TweetTableViewController.swift */,
 				974B8BD51EAA409500C739CA /* SmashTableViewController.swift */,
 				97E158261EA387EF000D8A64 /* TweetTableViewCell.swift */,
+				974B8BD91EAE35ED00C739CA /* ImageCollectionViewController.swift */,
+				974B8BDB1EAF39A600C739CA /* ImageCollectionViewCell.swift */,
 				9747EF0D1EA8F5550099E75A /* FetchedResultsTableViewController.swift */,
 				9747EF0E1EA8F5550099E75A /* UITableViewDataSource+NSFetchedResultsController.swift */,
 				97E1581F1EA376BE000D8A64 /* Supporting files */,
@@ -213,6 +219,7 @@
 				97E158211EA37728000D8A64 /* TweetTableViewController.swift in Sources */,
 				97BA4C791EA798B200C3AD69 /* HistoryTableViewController.swift in Sources */,
 				974B8BD61EAA409500C739CA /* SmashTableViewController.swift in Sources */,
+				974B8BDC1EAF39A600C739CA /* ImageCollectionViewCell.swift in Sources */,
 				9747EF361EAA02B50099E75A /* Tweet.swift in Sources */,
 				97BA4C771EA74EB200C3AD69 /* ImageViewController.swift in Sources */,
 				9747EF0F1EA8F5550099E75A /* FetchedResultsTableViewController.swift in Sources */,
@@ -221,6 +228,7 @@
 				97E158271EA387EF000D8A64 /* TweetTableViewCell.swift in Sources */,
 				9747EF101EA8F5550099E75A /* UITableViewDataSource+NSFetchedResultsController.swift in Sources */,
 				974B8BD81EAB81F400C739CA /* SearchWord.swift in Sources */,
+				974B8BDA1EAE35ED00C739CA /* ImageCollectionViewController.swift in Sources */,
 				9747EF0C1EA8F4FD0099E75A /* MentionPopularityTableViewController.swift in Sources */,
 				9747EF131EA8F92F0099E75A /* Model.xcdatamodeld in Sources */,
 			);

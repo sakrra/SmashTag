@@ -138,11 +138,21 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if let mentionsViewController = (segue.destination as? MentionsTableViewController) {
-            if segue.identifier == "mention" {
+        if segue.identifier == "mention" {
+            if let mentionsViewController = (segue.destination as? MentionsTableViewController) {
                 if let tweetCell = (sender as? TweetTableViewCell) {
                     mentionsViewController.tweet = tweetCell.tweet
                 }
+            }
+        } else if segue.identifier == "showImages" {
+            if let imageCollectionVC = (segue.destination as? ImageCollectionViewController) {
+                var mediaArray = Array<MediaItem>()
+                for tweetArray in tweets {
+                    for tweet in tweetArray {
+                        mediaArray.insert(contentsOf: tweet.media, at: 0)
+                    }
+                }
+                imageCollectionVC.mediaItems = mediaArray
             }
         }
     }

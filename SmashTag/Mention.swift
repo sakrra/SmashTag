@@ -29,7 +29,6 @@ class Mention: NSManagedObject {
                     print("searchWord = \(searchWord)")
                     print("matchedTweets = \(matchedTweets)")
                     mention.tweetCount = Int32(matchedTweets)
-                    tweet.addToMentions(mention)
                     mention.addToTweets(tweet)
                 }
                 return mention
@@ -40,7 +39,7 @@ class Mention: NSManagedObject {
         // create new mention
         let mention = Mention(context: context)
         mention.keyword = mentionText
-        tweet.addToMentions(mention)
+        mention.addToTweets(tweet)
         mention.tweetCount = 1
         
         return mention

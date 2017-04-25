@@ -10,6 +10,10 @@ import UIKit
 
 class ImageViewController: UIViewController {
     
+    static let identifier = "ImageViewController"
+    
+    var shouldShowWholeImage = false
+    
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.delegate = self
@@ -45,7 +49,11 @@ class ImageViewController: UIViewController {
         let scale = max(widthScale, heightScale) // starting zoom scale
         scrollView.minimumZoomScale = minScale
         scrollView.maximumZoomScale = 3.0
-        scrollView.zoomScale = scale
+        if shouldShowWholeImage {
+            scrollView.zoomScale = minScale
+        } else {
+            scrollView.zoomScale = scale
+        }
     }
 }
 
